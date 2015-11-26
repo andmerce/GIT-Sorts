@@ -109,26 +109,26 @@ public class Sort {
 	 */
 	//auxilary array for merges
 	private static Comparable[] aux;
-	public static void sort(Comparable[] a)
+	public static void mergesort(Comparable[] a)
 	{
 		aux = new Comparable[a.length];//allocate space just once
-		sort(a, 0, a.length -1);
+		mergesort(a, 0, a.length -1);
 	}
 	/*
 	 * To sort  subarray a[lo..hi] we divide it into two parts:
 	 * a[lo..mid] and a[mid+1..hi], sort them independently(via recursive calls)
 	 * and merge the resulting ordered subarrays to produce the result 10/26/2015
 	 */
-	private static void sort(Comparable[] a, int lo, int hi)
+	private static void mergesort(Comparable[] a, int lo, int hi)
 	{
 		// this is the base case to get out of recursive call
 		if(hi <= lo) return;
 		//split the array in two
 		int mid = lo + (hi - lo)/2;
 		//recursively sort the left half
-		sort(a, lo, mid);
+		mergesort(a, lo, mid);
 		//recursively sort the right half
-		sort(a, mid+1, hi);
+		mergesort(a, mid+1, hi);
 		//merge both sorted halves
 		merge(a, lo, mid, hi);
 	}
@@ -159,7 +159,7 @@ public class Sort {
 			else if(j>hi)                         a[k] = aux[i++];
 			//current key on right less than current key on left(take from the right)
 			else if(less(aux[j], aux[i]))         a[k] = aux[j++];
-			//and current keyon right greater than or equal to current key on left(take from the left)
+			//and current key on right greater than or equal to current key on left(take from the left)
 			else                                  a[k] = aux[i++];
 		}
 	}
